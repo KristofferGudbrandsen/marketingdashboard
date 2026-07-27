@@ -15,17 +15,6 @@
   *{box-sizing:border-box;}
   body{margin:0; background:var(--page); font-family:'Segoe UI',Arial,Helvetica,sans-serif; color:var(--ink);}
   .app{display:flex; align-items:flex-start; min-height:100vh;}
-  .sidebar{width:230px; flex-shrink:0; position:sticky; top:0; height:100vh; background:var(--ink); color:#fff; padding:24px 16px; display:flex; flex-direction:column; overflow-y:auto;}
-  .sb-brand{display:flex; align-items:center; gap:11px; padding:4px 8px 20px;}
-  .sb-brand .logo{width:38px; height:38px; border-radius:10px; background:linear-gradient(150deg,#FF9A3D,#F5821F 55%,#E86F0C); color:#fff; font-weight:900; font-size:18px; display:flex; align-items:center; justify-content:center;}
-  .sb-brand .t{font-weight:800; font-size:15px; line-height:1.1;}
-  .sb-brand .s{font-size:10px; letter-spacing:1px; text-transform:uppercase; color:#9a948c; margin-top:3px;}
-  .sb-lab{font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:#7d776e; font-weight:800; padding:14px 10px 6px;}
-  .sb-link{display:flex; align-items:center; gap:10px; padding:9px 11px; border-radius:9px; color:#cfc9c1; font-size:13.5px; font-weight:600; text-decoration:none; cursor:pointer;}
-  .sb-link:hover{background:#2a2a2a; color:#fff;}
-  .sb-link.active{background:var(--orange); color:#fff;}
-  .sb-link .ic{width:20px; text-align:center; font-size:13px;}
-  .sb-foot{margin-top:auto; padding:12px 10px 0; font-size:11px; color:#7d776e;}
   .wrap{flex:1; min-width:0; max-width:1160px; margin:0 auto; padding:24px 26px 60px;}
   .topbar{display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:16px;}
   .hd-brand{display:flex; align-items:center; gap:12px;}
@@ -33,10 +22,31 @@
   h1{font-size:22px; margin:0; letter-spacing:-.4px;}
   .sub{color:var(--grey); font-size:13px; margin-top:2px;}
   .demo-tag{background:#FFF0E4; color:var(--orange-deep); font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase; padding:6px 11px; border-radius:20px;}
-  .period{display:flex; flex-direction:column; align-items:flex-end; gap:7px;}
+  .period{display:flex; flex-direction:column; align-items:flex-end; gap:9px; position:relative;}
   .controls{display:flex; gap:6px; flex-wrap:wrap;}
   .pill{background:var(--card); border:1px solid var(--border); color:var(--grey); font-size:12px; font-weight:700; padding:7px 13px; border-radius:20px; cursor:pointer;}
   .pill.active{background:var(--ink); color:#fff; border-color:var(--ink);}
+  .datenav{display:flex; align-items:center; gap:6px;}
+  .dn-btn{width:30px; height:30px; border-radius:50%; border:1px solid var(--border); background:var(--card); color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:12px; user-select:none;}
+  .dn-btn:hover{background:var(--soft);}
+  .dn-label{font-size:13px; font-weight:800; min-width:170px; text-align:center; text-transform:capitalize;}
+  .datepicker{position:absolute; top:78px; right:0; z-index:60; background:var(--card); border:1px solid var(--border); border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,.15); padding:14px; width:272px;}
+  .datepicker[hidden]{display:none;}
+  .dp-head{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+  .dp-title{font-weight:800; font-size:13.5px; text-transform:capitalize;}
+  .dp-nav{cursor:pointer; width:26px; height:26px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:11px;}
+  .dp-nav:hover{background:var(--soft);}
+  .dp-weekdays{display:grid; grid-template-columns:repeat(7,1fr); gap:2px; margin-bottom:4px;}
+  .dp-weekdays span{font-size:10px; font-weight:700; color:var(--grey); text-align:center;}
+  .dp-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:2px;}
+  .dp-day{text-align:center; font-size:12px; font-weight:600; padding:6px 0; border-radius:7px; cursor:pointer;}
+  .dp-day:hover{background:var(--soft);}
+  .dp-day.blank{visibility:hidden; cursor:default;}
+  .dp-day.range{background:#FFE7D3;}
+  .dp-day.sel{background:var(--orange); color:#fff;}
+  .dp-foot{display:flex; justify-content:space-between; align-items:center; margin-top:10px; font-size:12px;}
+  .dp-sel{color:var(--grey); font-weight:600;}
+  .dp-clear{color:var(--orange-deep); font-weight:700; cursor:pointer;}
   .tabs{display:flex; gap:4px; flex-wrap:wrap; border-bottom:2px solid var(--border); margin-bottom:22px;}
   .tab{padding:11px 15px; font-size:13.5px; font-weight:700; color:var(--grey); cursor:pointer; border-bottom:3px solid transparent; margin-bottom:-2px; white-space:nowrap;}
   .tab:hover{color:var(--ink);}
@@ -72,8 +82,6 @@
   tr:last-child td{border-bottom:none;}
   .chan{display:inline-flex; align-items:center; gap:7px; font-weight:600;}
   .dot{width:9px; height:9px; border-radius:50%; display:inline-block;}
-  .tag{font-size:11px; font-weight:800; padding:3px 9px; border-radius:20px;}
-  .tag.good{background:#e7f6ec; color:var(--green);} .tag.mid{background:#fff2e0; color:var(--orange-deep);} .tag.low{background:#fbe9e7; color:var(--red);}
   .num{text-align:right; font-variant-numeric:tabular-nums;}
   .rate{font-weight:800; color:var(--orange-deep);}
   .ch-head{display:flex; align-items:center; gap:11px; margin-bottom:16px;}
@@ -91,19 +99,28 @@
   .eng .el{font-size:11px; text-transform:uppercase; letter-spacing:.4px; color:var(--grey); font-weight:700;}
   .eng .ev{font-size:18px; font-weight:900;}
   .ch-body{display:grid; grid-template-columns:1.35fr 1fr; gap:20px; align-items:center;}
-  .dark-panel{background:#67686d; border-radius:14px; padding:16px 14px 8px;}
   .legend-row{display:flex; gap:18px; flex-wrap:wrap; margin:6px 2px 14px; font-size:12.5px; font-weight:700;}
   .legend-row .lg{display:flex; align-items:center; gap:7px; color:var(--ink);}
   .legend-row .ls{width:22px; height:4px; border-radius:3px;}
-  .vid{display:flex; gap:14px; align-items:center; padding:12px 0; border-bottom:1px solid var(--soft);}
-  .vid:last-child{border-bottom:none;}
-  .vthumb{width:60px; height:60px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px;}
-  .vmeta{flex:1; min-width:0;}
-  .vtitle{font-weight:700; font-size:14px;}
-  .vsub{font-size:12px; color:var(--grey); margin-top:2px;}
-  .vnums{display:flex; gap:20px; text-align:right;}
-  .vnums .k{font-size:11px; color:var(--grey); text-transform:uppercase; letter-spacing:.4px; font-weight:700;}
-  .vnums .v{font-size:16px; font-weight:900;}
+  .insight{background:var(--soft); border:1px solid var(--border); border-radius:12px; padding:11px 14px; font-size:13px; color:var(--ink); margin-bottom:14px;}
+  .insight b{color:var(--orange-deep);}
+  .mini{display:flex; gap:14px; flex-wrap:wrap;}
+  .mini .m{flex:1; min-width:120px; background:var(--soft); border-radius:12px; padding:14px 16px;}
+  .mini .m .l{font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--grey); font-weight:700;}
+  .mini .m .v{font-size:24px; font-weight:900; margin-top:5px;}
+  .chan-card .head{display:flex; align-items:center; gap:9px; font-weight:800; font-size:15px; margin-bottom:4px;}
+  .chan-ico{width:26px; height:26px; border-radius:7px; color:#fff; font-size:12px; font-weight:900; display:flex; align-items:center; justify-content:center;}
+  .chan-big{font-size:26px; font-weight:900; letter-spacing:-.5px;}
+  .chan-big small{font-size:13px; font-weight:600; color:var(--grey);}
+  .chan-note{font-size:12px; color:var(--grey); margin-top:8px;}
+  .goal{height:6px; background:var(--soft); border-radius:6px; margin-top:12px; overflow:hidden;}
+  .goal span{display:block; height:100%; background:linear-gradient(90deg,#FF9A3D,#F5821F);}
+  .camp-row{display:flex; justify-content:space-between; font-size:13px; padding:7px 0; border-bottom:1px solid var(--soft);}
+  .camp-row:last-child{border-bottom:none;}
+  .camp-row .v{font-weight:800;}
+  .camp-head{display:flex; align-items:center; gap:8px; font-weight:800; font-size:15px; margin-bottom:8px;}
+  .camp-bar{height:4px; background:linear-gradient(90deg,#FF9A3D,#F5821F); margin:-20px -20px 16px; border-radius:18px 18px 0 0;}
+  .note-band{background:#FFF7F0; border:1px dashed #FCDCC0; border-radius:12px; padding:10px 14px; font-size:12.5px; color:var(--orange-deep); font-weight:600; margin-bottom:16px;}
   /* videogalleri */
   .sortbar{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:0 2px 16px; font-size:12.5px;}
   .sortbar .lbl{color:var(--grey); font-weight:700;}
@@ -124,42 +141,47 @@
   .vcmetrics .k{font-size:10.5px; text-transform:uppercase; letter-spacing:.4px; color:var(--grey); font-weight:700;}
   .vcmetrics .v{font-size:15px; font-weight:900; margin-top:2px;}
   .vcmetrics .v.rate{color:var(--orange-deep);}
-  .insight{background:var(--soft); border:1px solid var(--border); border-radius:12px; padding:11px 14px; font-size:13px; color:var(--ink); margin-bottom:14px;}
-  .insight b{color:var(--orange-deep);}
-  .mini{display:flex; gap:14px; flex-wrap:wrap;}
-  .mini .m{flex:1; min-width:120px; background:var(--soft); border-radius:12px; padding:14px 16px;}
-  .mini .m .l{font-size:11px; text-transform:uppercase; letter-spacing:.5px; color:var(--grey); font-weight:700;}
-  .mini .m .v{font-size:24px; font-weight:900; margin-top:5px;}
-  .chan-card .head{display:flex; align-items:center; gap:9px; font-weight:800; font-size:15px; margin-bottom:4px;}
-  .chan-ico{width:26px; height:26px; border-radius:7px; color:#fff; font-size:12px; font-weight:900; display:flex; align-items:center; justify-content:center;}
-  .chan-big{font-size:26px; font-weight:900; letter-spacing:-.5px;}
-  .chan-big small{font-size:13px; font-weight:600; color:var(--grey);}
-  .chan-note{font-size:12px; color:var(--grey); margin-top:8px;}
-  .goal{height:6px; background:var(--soft); border-radius:6px; margin-top:12px; overflow:hidden;}
-  .goal span{display:block; height:100%; background:linear-gradient(90deg,#FF9A3D,#F5821F);}
-  .camp-row{display:flex; justify-content:space-between; font-size:13px; padding:7px 0; border-bottom:1px solid var(--soft);}
-  .camp-row:last-child{border-bottom:none;}
-  .camp-row .v{font-weight:800;}
-  .camp-head{display:flex; align-items:center; gap:8px; font-weight:800; font-size:15px; margin-bottom:8px;}
-  .camp-bar{height:4px; background:linear-gradient(90deg,#FF9A3D,#F5821F); margin:-20px -20px 16px; border-radius:18px 18px 0 0;}
-  .note-band{background:#FFF7F0; border:1px dashed #FCDCC0; border-radius:12px; padding:10px 14px; font-size:12.5px; color:var(--orange-deep); font-weight:600; margin-bottom:16px;}
+  /* kalender */
+  .cal-legend{display:flex; gap:16px; flex-wrap:wrap; margin-bottom:16px; font-size:12.5px; font-weight:700;}
+  .cal-legend .cl{display:flex; align-items:center; gap:7px; color:var(--ink);}
+  .cal-legend .cd{width:12px; height:12px; border-radius:3px;}
+  .cal-scroll{overflow-x:auto;}
+  .cal-inner{min-width:680px;}
+  .cal-weekdays{display:grid; grid-template-columns:repeat(7,1fr); gap:8px; margin-bottom:8px;}
+  .cal-weekdays div{font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.5px; color:var(--grey); text-align:center;}
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:8px;}
+  .cal-cell{min-height:92px; border:1px solid var(--border); border-radius:12px; padding:7px; background:var(--card); display:flex; flex-direction:column; gap:4px;}
+  .cal-cell.empty{background:transparent; border:1px dashed var(--border);}
+  .cal-daynum{font-size:12px; font-weight:800; color:var(--grey);}
+  .cal-posts{display:flex; flex-wrap:wrap; gap:5px; margin-top:2px;}
+  .cal-mini{position:relative; width:38px; height:38px; border-radius:8px; overflow:hidden; cursor:pointer; border:2px solid #999; flex:none;}
+  .cal-mini img{width:100%; height:100%; object-fit:cover; display:block; background:var(--soft);}
+  .cal-mini .mi-type{position:absolute; right:0; bottom:0; background:rgba(0,0,0,.62); color:#fff; font-size:9px; line-height:1; padding:2px 3px; border-top-left-radius:5px;}
+  .cal-mini:hover{outline:2px solid var(--orange); outline-offset:1px;}
+  #cal-tip{position:fixed; z-index:200; background:#141414; color:#fff; font-size:11.5px; line-height:1.35; padding:8px 11px; border-radius:9px; pointer-events:none; max-width:230px; box-shadow:0 6px 22px rgba(0,0,0,.32); display:none;}
+  #cal-tip .tp-plat{font-weight:800;}
+  #cal-tip .tp-title{opacity:.85;}
+  #cal-detail{position:fixed; z-index:210; background:#fff; border:1px solid var(--border); border-radius:14px; box-shadow:0 14px 40px rgba(0,0,0,.22); width:262px; display:none; overflow:hidden;}
+  #cal-detail img{width:100%; height:140px; object-fit:cover; display:block; background:var(--soft);}
+  #cal-detail .cd-body{padding:13px 15px 15px;}
+  #cal-detail .cd-plat{display:inline-flex; align-items:center; gap:7px; font-weight:800; font-size:12.5px;}
+  #cal-detail .cd-dot{width:11px; height:11px; border-radius:50%;}
+  #cal-detail .cd-title{font-weight:700; font-size:15px; margin:8px 0 3px;}
+  #cal-detail .cd-meta{font-size:12.5px; color:var(--grey);}
+  #cal-detail .cd-close{position:absolute; top:9px; right:11px; cursor:pointer; color:#fff; background:rgba(0,0,0,.45); border-radius:50%; width:26px; height:26px; display:flex; align-items:center; justify-content:center; font-size:14px;}
+  #cal-detail .cd-go{margin-top:12px; width:100%; background:var(--ink); color:#fff; border:none; border-radius:10px; padding:9px 12px; font-size:12.5px; font-weight:800; cursor:pointer;}
+  #cal-detail .cd-go:hover{background:#000;}
+  .vcard.flash{outline:3px solid var(--orange); outline-offset:2px; box-shadow:0 0 0 5px #FCDCC0; transition:box-shadow .2s;}
   .foot{color:var(--grey); font-size:12px; margin-top:30px; text-align:center;}
   @media(max-width:900px){
-    .app{flex-direction:column;}
-    .sidebar{position:sticky; top:0; z-index:20; width:100%; height:auto; flex-direction:row; align-items:center; gap:6px; overflow-x:auto; padding:10px 12px;}
-    .sb-brand{padding:0 10px 0 4px; flex-shrink:0;}
-    .sb-brand .s{display:none;}
-    .sb-lab,.sb-foot{display:none;}
-    .sb-link{flex-shrink:0; padding:8px 12px; white-space:nowrap;}
-    .sb-link .ic{display:none;}
     .kpis,.cols-4,.cols-3{grid-template-columns:repeat(2,1fr);} .cols-2,.cols-2b,.ch-body{grid-template-columns:1fr;} .eng-split{grid-template-columns:repeat(2,1fr);}
     .vnums{gap:12px;}
+    .period{align-items:flex-start;}
   }
 </style>
 </head>
 <body>
 <div class="app">
-
   <div class="wrap">
 
     <div class="topbar">
@@ -167,11 +189,23 @@
         <div class="logo">T2</div>
         <div>
           <h1>Markedsføringsdashboard</h1>
-          <div class="sub">Time2Staff · Sosiale medier & nettside · <span id="period-label">Måned · Juni 2026</span></div>
+          <div class="sub">Time2Staff · Sosiale medier & nettside</div>
         </div>
       </div>
       <div class="period">
-        <span class="demo-tag">Eksempeldata</span>
+        <div class="datenav">
+          <span class="demo-tag" style="margin-right:6px;">Eksempeldata</span>
+          <span class="dn-btn" id="dn-prev">◀</span>
+          <span class="dn-label" id="period-label">Juni 2026</span>
+          <span class="dn-btn" id="dn-next">▶</span>
+          <span class="dn-btn" id="dn-cal" title="Velg dato">📅</span>
+        </div>
+        <div class="datepicker" id="datepicker" hidden>
+          <div class="dp-head"><span class="dp-nav" id="dp-prev">◀</span><span class="dp-title" id="dp-title"></span><span class="dp-nav" id="dp-next">▶</span></div>
+          <div class="dp-weekdays"><span>Ma</span><span>Ti</span><span>On</span><span>To</span><span>Fr</span><span>Lø</span><span>Sø</span></div>
+          <div class="dp-grid" id="dp-grid"></div>
+          <div class="dp-foot"><span class="dp-sel" id="dp-sel">Ingen valgt</span><span class="dp-clear" id="dp-clear">Nullstill</span></div>
+        </div>
         <div class="controls" id="period-ctrl">
           <span class="pill" data-p="dag">Dag</span>
           <span class="pill" data-p="uke">Uke</span>
@@ -187,6 +221,7 @@
       <div class="tab active" data-page="overview">Oversikt</div>
       <div class="tab" data-page="channels">Kanaler</div>
       <div class="tab" data-page="content">Innhold & video</div>
+      <div class="tab" data-page="calendar">Kalender</div>
       <div class="tab" data-page="paid">Betalt annonsering</div>
       <div class="tab" data-page="timing">Publiseringstid</div>
       <div class="tab" data-page="web">Nettside</div>
@@ -194,7 +229,7 @@
       <div class="tab" data-page="campaigns">Kampanjer</div>
     </div>
 
-    <!-- ================= OVERSIKT ================= -->
+    <!-- OVERSIKT -->
     <div class="pageview active" data-page="overview">
       <div class="section-title"><span class="n">01</span> Total oversikt · alle kanaler samlet</div>
       <div class="grid kpis">
@@ -211,13 +246,10 @@
         <div class="card"><div class="chart-head"><h3>Rekkevidde og engasjement per uke</h3><span class="note">Siste 12 uker</span></div><div class="chart-box"><canvas id="trendChart"></canvas></div></div>
         <div class="card"><div class="chart-head"><h3>Rekkevidde per kanal</h3><span class="note">Andel</span></div><div class="chart-box"><canvas id="channelChart"></canvas></div></div>
       </div>
-      <div class="card" style="margin-top:16px;">
-        <div class="chart-head"><h3>Organisk vs. betalt</h3><span class="note">Andel av rekkevidde, visninger og engasjement</span></div>
-        <div class="chart-box sm"><canvas id="orgPaidChart"></canvas></div>
-      </div>
+      <div class="card" style="margin-top:16px;"><div class="chart-head"><h3>Organisk vs. betalt</h3><span class="note">Andel av rekkevidde, visninger og engasjement</span></div><div class="chart-box sm"><canvas id="orgPaidChart"></canvas></div></div>
     </div>
 
-    <!-- ================= KANALER ================= -->
+    <!-- KANALER -->
     <div class="pageview" data-page="channels">
       <div class="section-title"><span class="n">02</span> Facebook</div>
       <div class="card">
@@ -321,7 +353,7 @@
       <div class="card" style="margin-top:16px;"><div class="chart-head"><h3>Følgervekst per kanal</h3><span class="note">Netto nye · siste 5 mnd</span></div><div class="chart-box sm"><canvas id="followerChart"></canvas></div></div>
     </div>
 
-    <!-- ================= INNHOLD & VIDEO ================= -->
+    <!-- INNHOLD & VIDEO -->
     <div class="pageview" data-page="content">
       <div class="section-title"><span class="n">01</span> Innhold & video · beste innhold denne perioden</div>
       <div class="card" style="margin-bottom:16px;">
@@ -336,7 +368,6 @@
         <div class="card"><div class="chart-head"><h3>Topp videoer etter visninger</h3><span class="note">Denne perioden</span></div><div class="chart-box"><canvas id="videoBarChart"></canvas></div></div>
         <div class="card"><div class="chart-head"><h3>Engasjementsrate per format</h3><span class="note">Alle innlegg</span></div><div class="chart-box"><canvas id="formatChart"></canvas></div></div>
       </div>
-
       <div class="section-title"><span class="n">02</span> Alle videoer</div>
       <div class="sortbar">
         <span class="lbl">Sortér etter:</span>
@@ -349,7 +380,27 @@
       <div class="vgrid" id="videoGrid"></div>
     </div>
 
-    <!-- ================= BETALT ANNONSERING ================= -->
+    <!-- KALENDER -->
+    <div class="pageview" data-page="calendar">
+      <div class="section-title"><span class="n">01</span> Innholdskalender · <span id="cal-month-label" style="text-transform:capitalize;">juni 2026</span> · <span id="cal-count"></span> innlegg</div>
+      <div class="card">
+        <div class="cal-legend">
+          <span class="cl"><span class="cd" style="background:#1877F2"></span> Facebook</span>
+          <span class="cl"><span class="cd" style="background:#A855F7"></span> Instagram</span>
+          <span class="cl"><span class="cd" style="background:#0A66C2"></span> LinkedIn</span>
+          <span class="cl"><span class="cd" style="background:#111"></span> TikTok</span>
+          <span class="cl" style="color:var(--grey);">▶ video · ▦ karusell · ▣ bilde · ✎ tekst · ★ event</span>
+        </div>
+        <div class="cal-scroll"><div class="cal-inner">
+          <div class="cal-weekdays"><div>Man</div><div>Tir</div><div>Ons</div><div>Tor</div><div>Fre</div><div>Lør</div><div>Søn</div></div>
+          <div class="cal-grid" id="calendarGrid"></div>
+          <div id="cal-tip"></div>
+          <div id="cal-detail"></div>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- BETALT ANNONSERING -->
     <div class="pageview" data-page="paid">
       <div class="section-title"><span class="n">01</span> Betalt annonsering</div>
       <div class="note-band">Betalt er i en tidlig, voksende fase. Tallene er lave i volum nå – seksjonen er bygget for å skalere når budsjettet øker.</div>
@@ -379,7 +430,7 @@
       </div>
     </div>
 
-    <!-- ================= PUBLISERINGSTID ================= -->
+    <!-- PUBLISERINGSTID -->
     <div class="pageview" data-page="timing">
       <div class="section-title"><span class="n">01</span> Beste publiseringstid · per kanal</div>
       <div class="card">
@@ -394,7 +445,7 @@
       </div>
     </div>
 
-    <!-- ================= NETTSIDE ================= -->
+    <!-- NETTSIDE -->
     <div class="pageview" data-page="web">
       <div class="section-title"><span class="n">01</span> Nettside</div>
       <div class="card" style="margin-bottom:16px;">
@@ -411,7 +462,7 @@
       </div>
     </div>
 
-    <!-- ================= MÅLGRUPPE ================= -->
+    <!-- MÅLGRUPPE -->
     <div class="pageview" data-page="audience">
       <div class="section-title"><span class="n">01</span> Målgruppe · demografi på følgere</div>
       <div class="grid cols-2b">
@@ -421,7 +472,7 @@
       <div class="card" style="margin-top:16px;"><div class="chart-head"><h3>Geografi</h3><span class="note">Topp regioner</span></div><div class="chart-box sm"><canvas id="geoChart"></canvas></div></div>
     </div>
 
-    <!-- ================= KAMPANJER ================= -->
+    <!-- KAMPANJER -->
     <div class="pageview" data-page="campaigns">
       <div class="section-title"><span class="n">01</span> Kampanjer</div>
       <div class="grid cols-3">
@@ -438,114 +489,87 @@
 
 <script>
 const HAS_CHART = typeof Chart !== 'undefined';
-if(HAS_CHART){
-  Chart.defaults.font.family = "'Segoe UI',Arial,sans-serif";
-  Chart.defaults.color = '#6b6b6b';
-}
+if(HAS_CHART){ Chart.defaults.font.family="'Segoe UI',Arial,sans-serif"; Chart.defaults.color='#6b6b6b'; }
 const OR='#F5821F', INK='#141414', FB='#1877F2', IG='#A855F7', LI='#0A66C2', TT='#111';
 const weeks=['U1','U2','U3','U4','U5','U6','U7','U8','U9','U10','U11','U12'];
 const el=id=>document.getElementById(id);
+const fmt=n=>n.toLocaleString('nb-NO');
 
 const built={};
 const builders={
   overview(){
-    new Chart(el('trendChart'),{type:'line',
-      data:{labels:weeks,datasets:[
-        {label:'Rekkevidde',data:[19000,20200,18800,21400,23200,22400,24300,25800,24600,26400,27900,27400],borderColor:OR,backgroundColor:'rgba(245,130,31,.12)',fill:true,tension:.35,yAxisID:'y'},
-        {label:'Engasjement',data:[8200,8900,8100,9600,10400,9900,10800,11600,11100,12100,12800,12500],borderColor:INK,tension:.35,yAxisID:'y1'}]},
-      options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom'}},
-        scales:{y:{position:'left',title:{display:true,text:'Rekkevidde'}},y1:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Engasjement'}}}}});
-    new Chart(el('channelChart'),{type:'doughnut',
-      data:{labels:['TikTok','Instagram','LinkedIn','Facebook'],datasets:[{data:[61,18,15,6],backgroundColor:[TT,IG,LI,FB],borderWidth:2,borderColor:'#fff'}]},
-      options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'right'},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+'%'}}}}});
-    new Chart(el('orgPaidChart'),{type:'bar',
-      data:{labels:['Rekkevidde','Visninger','Engasjement'],datasets:[
-        {label:'Organisk',data:[86,86,91],backgroundColor:OR,borderRadius:6},
-        {label:'Betalt',data:[14,14,9],backgroundColor:INK,borderRadius:6}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},
-        scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,ticks:{callback:v=>v+' %'},grid:{color:'#f2ece4'}}}}});
+    new Chart(el('trendChart'),{type:'line',data:{labels:weeks,datasets:[
+      {label:'Rekkevidde',data:[19000,20200,18800,21400,23200,22400,24300,25800,24600,26400,27900,27400],borderColor:OR,backgroundColor:'rgba(245,130,31,.12)',fill:true,tension:.35,yAxisID:'y'},
+      {label:'Engasjement',data:[8200,8900,8100,9600,10400,9900,10800,11600,11100,12100,12800,12500],borderColor:INK,tension:.35,yAxisID:'y1'}]},
+      options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom'}},scales:{y:{position:'left',title:{display:true,text:'Rekkevidde'}},y1:{position:'right',grid:{drawOnChartArea:false},title:{display:true,text:'Engasjement'}}}}});
+    new Chart(el('channelChart'),{type:'doughnut',data:{labels:['TikTok','Instagram','LinkedIn','Facebook'],datasets:[{data:[61,18,15,6],backgroundColor:[TT,IG,LI,FB],borderWidth:2,borderColor:'#fff'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'right'},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+'%'}}}}});
+    new Chart(el('orgPaidChart'),{type:'bar',data:{labels:['Rekkevidde','Visninger','Engasjement'],datasets:[
+      {label:'Organisk',data:[86,86,91],backgroundColor:OR,borderRadius:6},
+      {label:'Betalt',data:[14,14,9],backgroundColor:INK,borderRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'%'}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:'#f2ece4'},ticks:{callback:v=>v+' %'}}}}});
   },
   channels(){
-    const mini=(id,color,views,reach)=>new Chart(el(id),{type:'line',
-      data:{labels:weeks,datasets:[
-        {label:'Visninger',data:views,borderColor:color,tension:.35,pointRadius:0,borderWidth:2.5},
-        {label:'Rekkevidde',data:reach,borderColor:'#c9c2b8',tension:.35,pointRadius:0,borderWidth:2,borderDash:[5,4]}]},
-      options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},
-        scales:{y:{grid:{color:'#f2ece4'},ticks:{font:{size:10}}},x:{grid:{display:false},ticks:{font:{size:9},maxTicksLimit:6}}}}});
+    const mini=(id,color,views,reach)=>new Chart(el(id),{type:'line',data:{labels:weeks,datasets:[
+      {label:'Visninger',data:views,borderColor:color,tension:.35,pointRadius:0,borderWidth:2.5},
+      {label:'Rekkevidde',data:reach,borderColor:'#c9c2b8',tension:.35,pointRadius:0,borderWidth:2,borderDash:[5,4]}]},
+      options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}},scales:{y:{grid:{color:'#f2ece4'},ticks:{font:{size:10}}},x:{grid:{display:false},ticks:{font:{size:9},maxTicksLimit:6}}}}});
     mini('fbChart',FB,[980,1050,1120,1080,1210,1180,1250,1320,1290,1350,1410,1260],[420,460,500,480,540,520,560,600,580,610,650,580]);
     mini('igChart',IG,[2900,3100,3300,3200,3600,3500,3700,3900,3800,4000,4200,3800],[1300,1400,1500,1450,1600,1550,1700,1800,1750,1850,1950,1740]);
     mini('liChart',LI,[2400,2650,2900,2800,3100,3050,3300,3500,3400,3600,3800,3500],[900,1000,1100,1080,1200,1180,1300,1400,1360,1450,1520,1410]);
     mini('ttChart',TT,[14000,16500,18800,17500,21000,20200,23100,25800,24600,26400,27900,26200],[3800,4500,5100,4800,5700,5500,6100,6800,6500,6900,7300,6900]);
-    new Chart(el('followerChart'),{type:'line',
-      data:{labels:['Feb','Mar','Apr','Mai','Jun'],datasets:[
-        {label:'Instagram',data:[120,140,180,210,200],borderColor:IG,tension:.35},
-        {label:'LinkedIn',data:[60,90,110,120,140],borderColor:LI,tension:.35},
-        {label:'TikTok',data:[40,80,120,150,160],borderColor:TT,tension:.35},
-        {label:'Facebook',data:[50,40,60,55,70],borderColor:FB,tension:.35}]},
+    new Chart(el('followerChart'),{type:'line',data:{labels:['Feb','Mar','Apr','Mai','Jun'],datasets:[
+      {label:'Instagram',data:[120,140,180,210,200],borderColor:IG,tension:.35},
+      {label:'LinkedIn',data:[60,90,110,120,140],borderColor:LI,tension:.35},
+      {label:'TikTok',data:[40,80,120,150,160],borderColor:TT,tension:.35},
+      {label:'Facebook',data:[50,40,60,55,70],borderColor:FB,tension:.35}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}});
   },
   content(){
-    new Chart(el('videoBarChart'),{type:'bar',
-      data:{labels:['A day as hotel staff','Kickoff hype','Behind the shift','Cafe speed-round','Job fair recap','Student freedom'],
-        datasets:[{data:[61200,45300,18400,5600,3200,2100],backgroundColor:[TT,TT,TT,IG,FB,IG],borderRadius:6}]},
-      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},
-        scales:{x:{grid:{color:'#f2ece4'},ticks:{callback:v=>v/1000+'k'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
-    new Chart(el('formatChart'),{type:'bar',
-      data:{labels:['Reel/video','Karusell','Bilde','Tekst'],datasets:[{data:[7.8,6.1,3.4,4.6],backgroundColor:[TT,IG,FB,LI],borderRadius:6}]},
-      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' %'}}},
-        scales:{y:{grid:{color:'#f2ece4'},ticks:{callback:v=>v+' %'}},x:{grid:{display:false}}}}});
+    new Chart(el('videoBarChart'),{type:'bar',data:{labels:['A day as hotel staff','Kickoff hype','Behind the shift','Cafe speed-round','Job fair recap','Student freedom'],datasets:[{data:[61200,45300,18400,5600,3200,2100],backgroundColor:[TT,TT,TT,IG,FB,IG],borderRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false}},scales:{x:{grid:{color:'#f2ece4'},ticks:{callback:v=>v/1000+'k'}},y:{grid:{display:false},ticks:{font:{size:11}}}}}});
+    new Chart(el('formatChart'),{type:'bar',data:{labels:['Reel/video','Karusell','Bilde','Tekst'],datasets:[{data:[7.8,6.1,3.4,4.6],backgroundColor:[TT,IG,FB,LI],borderRadius:6}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' %'}}},scales:{y:{grid:{color:'#f2ece4'},ticks:{callback:v=>v+' %'}},x:{grid:{display:false}}}}});
   },
   paid(){
-    new Chart(el('paidTrendChart'),{type:'line',
-      data:{labels:weeks,datasets:[{label:'Annonsebruk (kr)',data:[1800,2100,2400,2200,2600,2500,2900,3200,3100,3400,3800,3500],borderColor:INK,backgroundColor:'rgba(20,20,20,.08)',fill:true,tension:.35}]},
+    new Chart(el('paidTrendChart'),{type:'line',data:{labels:weeks,datasets:[{label:'Annonsebruk (kr)',data:[1800,2100,2400,2200,2600,2500,2900,3200,3100,3400,3800,3500],borderColor:INK,backgroundColor:'rgba(20,20,20,.08)',fill:true,tension:.35}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#f2ece4'},ticks:{callback:v=>v/1000+'k'}}}}});
-    new Chart(el('paidPlatformChart'),{type:'doughnut',
-      data:{labels:['Meta','LinkedIn','TikTok'],datasets:[{data:[47,35,18],backgroundColor:[FB,LI,TT],borderWidth:2,borderColor:'#fff'}]},
+    new Chart(el('paidPlatformChart'),{type:'doughnut',data:{labels:['Meta','LinkedIn','TikTok'],datasets:[{data:[47,35,18],backgroundColor:[FB,LI,TT],borderWidth:2,borderColor:'#fff'}]},
       options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'right'},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+'%'}}}}});
   },
   timing(){
     const hours=['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'];
     const ds=(label,color,data)=>({label,data,borderColor:color,backgroundColor:'transparent',tension:.4,pointRadius:0,borderWidth:3});
-    new Chart(el('timeChart'),{type:'line',
-      data:{labels:hours,datasets:[
-        ds('Facebook','#A855F7',[3,2,1,1,1,2,5,9,13,15,14,13,15,14,12,11,12,13,14,13,11,9,6,4]),
-        ds('Instagram','#EC4899',[4,2,1,1,1,2,4,7,10,11,10,11,13,12,11,12,14,16,19,22,24,21,14,8]),
-        ds('LinkedIn','#1877F2',[1,1,1,1,1,2,6,12,18,20,17,15,16,14,15,14,12,9,7,5,4,3,2,1]),
-        ds('TikTok','#111111',[6,4,2,1,1,1,3,5,8,9,9,10,12,11,10,11,13,15,18,22,26,28,20,11])]},
-      options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
-        plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'% aktive'}}},
-        scales:{y:{title:{display:true,text:'% aktive følgere'},grid:{color:'#f2ece4'}},
-                x:{title:{display:true,text:'Time på døgnet'},grid:{display:false}}}}});
+    new Chart(el('timeChart'),{type:'line',data:{labels:hours,datasets:[
+      ds('Facebook','#A855F7',[3,2,1,1,1,2,5,9,13,15,14,13,15,14,12,11,12,13,14,13,11,9,6,4]),
+      ds('Instagram','#EC4899',[4,2,1,1,1,2,4,7,10,11,10,11,13,12,11,12,14,16,19,22,24,21,14,8]),
+      ds('LinkedIn','#1877F2',[1,1,1,1,1,2,6,12,18,20,17,15,16,14,15,14,12,9,7,5,4,3,2,1]),
+      ds('TikTok','#111111',[6,4,2,1,1,1,3,5,8,9,9,10,12,11,10,11,13,15,18,22,26,28,20,11])]},
+      options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'top'},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y+'% aktive'}}},scales:{y:{title:{display:true,text:'% aktive følgere'},grid:{color:'#f2ece4'}},x:{title:{display:true,text:'Time på døgnet'},grid:{display:false}}}}});
   },
   web(){
-    new Chart(el('webTrafficChart'),{type:'line',
-      data:{labels:weeks,datasets:[{label:'Nettbesøk',data:[9800,10200,9600,11100,11800,10900,12300,13100,12600,13400,14100,13900],borderColor:OR,backgroundColor:'rgba(245,130,31,.12)',fill:true,tension:.35}]},
+    new Chart(el('webTrafficChart'),{type:'line',data:{labels:weeks,datasets:[{label:'Nettbesøk',data:[9800,10200,9600,11100,11800,10900,12300,13100,12600,13400,14100,13900],borderColor:OR,backgroundColor:'rgba(245,130,31,.12)',fill:true,tension:.35}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#f2ece4'}}}}});
-    new Chart(el('sourceChart'),{type:'bar',
-      data:{labels:['Sosialt','Organisk søk','Direkte','Betalt','Henvisning','E-post'],datasets:[{data:[38,29,15,9,5,4],backgroundColor:OR,borderRadius:6}]},
+    new Chart(el('sourceChart'),{type:'bar',data:{labels:['Sosialt','Organisk søk','Direkte','Betalt','Henvisning','E-post'],datasets:[{data:[38,29,15,9,5,4],backgroundColor:OR,borderRadius:6}]},
       options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+' %'}}},scales:{x:{grid:{display:false},ticks:{callback:v=>v+' %'}}}}});
   },
   audience(){
-    new Chart(el('ageChart'),{type:'bar',
-      data:{labels:['18–24','25–34','35–44','45–54','55+'],datasets:[{data:[38,34,16,8,4],backgroundColor:OR,borderRadius:6}]},
+    new Chart(el('ageChart'),{type:'bar',data:{labels:['18–24','25–34','35–44','45–54','55+'],datasets:[{data:[38,34,16,8,4],backgroundColor:OR,borderRadius:6}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y+' %'}}},scales:{y:{grid:{color:'#f2ece4'},ticks:{callback:v=>v+' %'}},x:{grid:{display:false}}}}});
-    new Chart(el('genderChart'),{type:'doughnut',
-      data:{labels:['Kvinner','Menn','Annet/ukjent'],datasets:[{data:[54,43,3],backgroundColor:[IG,LI,'#c9c2b8'],borderWidth:2,borderColor:'#fff'}]},
+    new Chart(el('genderChart'),{type:'doughnut',data:{labels:['Kvinner','Menn','Annet/ukjent'],datasets:[{data:[54,43,3],backgroundColor:[IG,LI,'#c9c2b8'],borderWidth:2,borderColor:'#fff'}]},
       options:{responsive:true,maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'right'},tooltip:{callbacks:{label:c=>c.label+': '+c.parsed+'%'}}}}});
-    new Chart(el('geoChart'),{type:'bar',
-      data:{labels:['Oslo','Bergen','Trondheim','Stavanger','Øvrige'],datasets:[{data:[31,14,11,8,36],backgroundColor:OR,borderRadius:6}]},
+    new Chart(el('geoChart'),{type:'bar',data:{labels:['Oslo','Bergen','Trondheim','Stavanger','Øvrige'],datasets:[{data:[31,14,11,8,36],backgroundColor:OR,borderRadius:6}]},
       options:{responsive:true,maintainAspectRatio:false,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+' %'}}},scales:{x:{grid:{display:false},ticks:{callback:v=>v+' %'}}}}});
   },
+  calendar(){},
   campaigns(){}
 };
 
 // ---- videogalleri ----
-const fmt=n=>n.toLocaleString('nb-NO');
 const platMeta={
-  tt:{name:'TikTok', grad:'linear-gradient(135deg,#3d3d3d,#111)'},
-  ig:{name:'Instagram', grad:'linear-gradient(135deg,#C86DD7,#A855F7 55%,#7C3AED)'},
-  fb:{name:'Facebook', grad:'linear-gradient(135deg,#4d94ff,#1877F2)'},
-  li:{name:'LinkedIn', grad:'linear-gradient(135deg,#2f8fd6,#0A66C2)'}
+  tt:{name:'TikTok', grad:'linear-gradient(135deg,#3d3d3d,#111)', color:'#111'},
+  ig:{name:'Instagram', grad:'linear-gradient(135deg,#C86DD7,#A855F7 55%,#7C3AED)', color:'#A855F7'},
+  fb:{name:'Facebook', grad:'linear-gradient(135deg,#4d94ff,#1877F2)', color:'#1877F2'},
+  li:{name:'LinkedIn', grad:'linear-gradient(135deg,#2f8fd6,#0A66C2)', color:'#0A66C2'}
 };
 const videosData=[
   {title:'A day as hotel staff', plat:'tt', day:21, views:61200, engagement:6800, engRate:9.8, likes:5400, saves:1200, watch:18, dur:'0:34'},
@@ -562,51 +586,172 @@ function renderVideos(key){
   const sorted=[...videosData].sort((a,b)=>b[key]-a[key]);
   grid.innerHTML=sorted.map(v=>{
     const p=platMeta[v.plat];
-    const rateColor=v.engRate>=5?'rate':'';
-    return `<div class="vcard">
-      <div class="vthumb2" style="background:${p.grad}">
-        <span class="vbadge">${p.name}</span>
-        <span class="vplay">▶</span>
-        <span class="vdur">${v.dur}</span>
-        <span class="vviews">▶ ${fmt(v.views)}</span>
-      </div>
-      <div class="vcbody">
-        <div class="vctitle">${v.title}</div>
-        <div class="vcsub">${p.name} · ${v.day}. juni</div>
-        <div class="vcmetrics">
-          <div><div class="k">Engasjement</div><div class="v">${fmt(v.engagement)}</div></div>
-          <div><div class="k">Eng.rate</div><div class="v ${rateColor}">${String(v.engRate).replace('.',',')} %</div></div>
-          <div><div class="k">Seertid</div><div class="v">${v.watch} s</div></div>
-          <div><div class="k">Lagringer</div><div class="v">${fmt(v.saves)}</div></div>
-        </div>
-      </div>
-    </div>`;
+    const rateCls=v.engRate>=5?'rate':'';
+    return '<div class="vcard" data-vtitle="'+v.title+'"><div class="vthumb2" style="background:'+p.grad+'">'
+      +'<span class="vbadge">'+p.name+'</span><span class="vplay">▶</span>'
+      +'<span class="vdur">'+v.dur+'</span><span class="vviews">▶ '+fmt(v.views)+'</span></div>'
+      +'<div class="vcbody"><div class="vctitle">'+v.title+'</div><div class="vcsub">'+p.name+' · '+v.day+'. juni</div>'
+      +'<div class="vcmetrics">'
+      +'<div><div class="k">Engasjement</div><div class="v">'+fmt(v.engagement)+'</div></div>'
+      +'<div><div class="k">Eng.rate</div><div class="v '+rateCls+'">'+String(v.engRate).replace('.',',')+' %</div></div>'
+      +'<div><div class="k">Seertid</div><div class="v">'+v.watch+' s</div></div>'
+      +'<div><div class="k">Lagringer</div><div class="v">'+fmt(v.saves)+'</div></div>'
+      +'</div></div></div>';
   }).join('');
   document.querySelectorAll('.sortbtn').forEach(b=>b.classList.toggle('active',b.dataset.sort===key));
 }
 document.querySelectorAll('.sortbtn').forEach(b=>b.addEventListener('click',()=>renderVideos(b.dataset.sort)));
 renderVideos('views');
 
+// ---- kalender ----
+const typeIcon={reel:'▶',video:'▶',karusell:'▦',bilde:'▣',tekst:'✎',event:'★'};
+const typeName={reel:'Reel',video:'Video',karusell:'Karusell',bilde:'Bilde',tekst:'Tekst',event:'Event'};
+const postsData=[
+  {day:2, plat:'li', type:'karusell', title:'Fillrate 92–98 %'},
+  {day:3, plat:'ig', type:'bilde', title:'Team spotlight'},
+  {day:5, plat:'tt', type:'reel', title:'Kickoff hype'},
+  {day:5, plat:'ig', type:'bilde', title:'Kickoff-bilder'},
+  {day:6, plat:'fb', type:'bilde', title:'Sommervikar-kampanje'},
+  {day:9, plat:'fb', type:'video', title:'Job fair recap'},
+  {day:10, plat:'tt', type:'reel', title:'Duett med kunde'},
+  {day:12, plat:'ig', type:'reel', title:'Student freedom story'},
+  {day:13, plat:'li', type:'tekst', title:'Ledig stilling-tips'},
+  {day:16, plat:'li', type:'video', title:'Meet a recruiter'},
+  {day:18, plat:'ig', type:'reel', title:'Cafe speed-round'},
+  {day:18, plat:'li', type:'tekst', title:'Ukens vikartips'},
+  {day:19, plat:'ig', type:'karusell', title:'5 tips til søkere'},
+  {day:21, plat:'tt', type:'reel', title:'A day as hotel staff'},
+  {day:21, plat:'ig', type:'karusell', title:'Bak kulissene'},
+  {day:21, plat:'fb', type:'bilde', title:'Hotell-highlights'},
+  {day:23, plat:'fb', type:'event', title:'Jobbmesse Oslo'},
+  {day:24, plat:'tt', type:'reel', title:'Warehouse morning'},
+  {day:25, plat:'ig', type:'reel', title:'Cafe reel #2'},
+  {day:27, plat:'tt', type:'reel', title:'Behind the shift'},
+  {day:29, plat:'li', type:'tekst', title:'Månedsoppsummering'}
+];
+function renderCalendar(){
+  const grid=el('calendarGrid'); if(!grid)return;
+  const year=2026, month=5; // juni
+  const first=new Date(year,month,1).getDay();       // 0=søn
+  const lead=(first+6)%7;                             // mandag først
+  const days=new Date(year,month+1,0).getDate();      // 30
+  let html='';
+  for(let i=0;i<lead;i++) html+='<div class="cal-cell empty"></div>';
+  for(let d=1;d<=days;d++){
+    const posts=postsData.filter(p=>p.day===d);
+    html+='<div class="cal-cell"><div class="cal-daynum">'+d+'</div><div class="cal-posts">'
+      +posts.map(p=>{const m=platMeta[p.plat]; const img='https://picsum.photos/seed/t2s'+p.day+p.plat+p.type.charAt(0)+'/120/120'; return '<div class="cal-mini" style="border-color:'+m.color+'" data-plat="'+p.plat+'" data-type="'+p.type+'" data-title="'+p.title+'" data-img="'+img+'" data-day="'+p.day+'"><img loading="lazy" src="'+img+'" alt=""><span class="mi-type">'+(typeIcon[p.type]||'')+'</span></div>';}).join('')
+      +'</div></div>';
+  }
+  grid.innerHTML=html;
+  const c=el('cal-count'); if(c) c.textContent=postsData.length;
+}
+renderCalendar();
+// ---- kalender: hover viser hvor postet, klikk gir detaljer ----
+(function(){
+  const grid=el('calendarGrid'), tip=el('cal-tip'), det=el('cal-detail');
+  if(!grid) return;
+  function goToVideo(title){
+    showPage('content');
+    setTimeout(function(){
+      var card=Array.prototype.slice.call(document.querySelectorAll('#videoGrid .vcard')).filter(function(c){return c.getAttribute('data-vtitle')===title;})[0];
+      if(card){ card.scrollIntoView({behavior:'smooth',block:'center'}); card.classList.add('flash'); setTimeout(function(){card.classList.remove('flash');},2200); }
+    },80);
+  }
+  let mx=0,my=0;
+  function place(){ let x=mx+14,y=my+14; if(x+240>window.innerWidth)x=mx-250; if(y+90>window.innerHeight)y=my-90; tip.style.left=x+'px'; tip.style.top=y+'px'; }
+  grid.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; if(tip.style.display==='block') place(); });
+  grid.addEventListener('mouseover',e=>{ const m=e.target.closest('.cal-mini'); if(!m)return;
+    const pl=platMeta[m.dataset.plat];
+    tip.innerHTML='<span class="tp-plat" style="color:'+pl.color+'">'+pl.name+'</span> \u00b7 '+(typeName[m.dataset.type]||m.dataset.type)+'<br><span class="tp-title">'+m.dataset.title+'</span>';
+    tip.style.display='block'; place(); });
+  grid.addEventListener('mouseout',e=>{ const m=e.target.closest('.cal-mini'); if(!m)return; tip.style.display='none'; });
+  grid.addEventListener('click',e=>{ const m=e.target.closest('.cal-mini'); if(!m)return; e.stopPropagation();
+    const pl=platMeta[m.dataset.plat];
+    const isVideo=videosData.some(v=>v.title===m.dataset.title);
+    det.innerHTML='<div class="cd-close" id="cd-close">\u00d7</div><img src="'+m.dataset.img+'" alt=""><div class="cd-body"><span class="cd-plat"><span class="cd-dot" style="background:'+pl.color+'"></span>Publisert p\u00e5 '+pl.name+'</span><div class="cd-title">'+m.dataset.title+'</div><div class="cd-meta">'+(typeName[m.dataset.type]||m.dataset.type)+' \u00b7 '+m.dataset.day+'. juni 2026</div>'+(isVideo?'<button class="cd-go" id="cd-go" data-vtitle="'+m.dataset.title+'">Se videoen i oversikten \u2192</button>':'')+'</div>';
+    det.style.display='block';
+    const r=m.getBoundingClientRect(); const w=262,hh=det.offsetHeight||230;
+    let x=r.left, y=r.bottom+8;
+    if(x+w>window.innerWidth) x=window.innerWidth-w-10; if(x<8)x=8;
+    if(y+hh>window.innerHeight) y=r.top-hh-8; if(y<8)y=8;
+    det.style.left=x+'px'; det.style.top=y+'px';
+    tip.style.display='none';
+    const c=el('cd-close'); if(c) c.addEventListener('click',ev=>{ev.stopPropagation();det.style.display='none';});
+    const g=el('cd-go'); if(g) g.addEventListener('click',ev=>{ev.stopPropagation();det.style.display='none';goToVideo(g.dataset.vtitle);});
+  });
+  document.addEventListener('click',e=>{ if(det.style.display==='block' && !det.contains(e.target) && !e.target.closest('.cal-mini')) det.style.display='none'; });
+})();
+
+// ---- sidebytte (faner) ----
 function showPage(id){
   document.querySelectorAll('.pageview').forEach(p=>p.classList.toggle('active',p.dataset.page===id));
   document.querySelectorAll('#tabs .tab').forEach(t=>t.classList.toggle('active',t.dataset.page===id));
   if(!built[id]){built[id]=true; try{ if(HAS_CHART && builders[id]) builders[id](); }catch(e){ console.error('Graf feilet:',e); }}
   window.scrollTo({top:0,behavior:'smooth'});
 }
-document.querySelectorAll('[data-page]').forEach(elm=>{
-  if(elm.classList.contains('pageview'))return;
-  elm.addEventListener('click',()=>showPage(elm.dataset.page));
-});
+document.querySelectorAll('#tabs .tab').forEach(t=>t.addEventListener('click',()=>showPage(t.dataset.page)));
 showPage('overview');
 
+// ---- dato-navigator ----
+let gran='mnd', off=0;
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+function periodLabel(){
+  const d=new Date(2026,5,23);
+  if(gran==='dag'){ d.setDate(d.getDate()+off); return cap(d.toLocaleDateString('nb-NO',{day:'numeric',month:'long',year:'numeric'})); }
+  if(gran==='mnd'){ d.setMonth(5+off); return cap(d.toLocaleDateString('nb-NO',{month:'long',year:'numeric'})); }
+  if(gran==='ar'){ return String(2026+off); }
+  if(gran==='uke'){ let w=25+off,y=2026; while(w<1){w+=52;y--;} while(w>52){w-=52;y++;} return 'Uke '+w+' · '+y; }
+  if(gran==='kvartal'){ let q=2+off,y=2026; while(q<1){q+=4;y--;} while(q>4){q-=4;y++;} return 'Q'+q+' · '+y; }
+  if(gran==='halvar'){ let h=1+off,y=2026; while(h<1){h+=2;y--;} while(h>2){h-=2;y++;} return 'H'+h+' · '+y; }
+  return '';
+}
+function updatePeriod(){ el('period-label').textContent=periodLabel(); }
 document.querySelectorAll('#period-ctrl .pill').forEach(p=>{
   p.addEventListener('click',()=>{
     document.querySelectorAll('#period-ctrl .pill').forEach(x=>x.classList.remove('active'));
-    p.classList.add('active');
-    const map={dag:'Dag · 23. juni 2026',uke:'Uke 25 · 2026',mnd:'Måned · Juni 2026',kvartal:'Kvartal · Q2 2026',halvar:'Halvår · H1 2026',ar:'År · 2026'};
-    el('period-label').textContent=map[p.dataset.p];
+    p.classList.add('active'); gran=p.dataset.p; off=0; updatePeriod();
   });
 });
+el('dn-prev').addEventListener('click',()=>{ off--; updatePeriod(); });
+el('dn-next').addEventListener('click',()=>{ off++; updatePeriod(); });
+
+// ---- datovelger (popup) ----
+const MONTHS=['januar','februar','mars','april','mai','juni','juli','august','september','oktober','november','desember'];
+let pmonth=5,pyear=2026,selStart=null,selEnd=null;
+const keyOf=(y,m,d)=>y*10000+m*100+d;
+const deKey=k=>({y:Math.floor(k/10000),m:Math.floor(k/100)%100,d:k%100});
+function renderPicker(){
+  el('dp-title').textContent=cap(MONTHS[pmonth])+' '+pyear;
+  const first=new Date(pyear,pmonth,1).getDay(),lead=(first+6)%7,days=new Date(pyear,pmonth+1,0).getDate();
+  const lo=(selStart&&selEnd)?Math.min(selStart,selEnd):null, hi=(selStart&&selEnd)?Math.max(selStart,selEnd):null;
+  let h='';
+  for(let i=0;i<lead;i++) h+='<span class="dp-day blank"></span>';
+  for(let d=1;d<=days;d++){ const k=keyOf(pyear,pmonth,d); let c='dp-day';
+    if(lo!==null&&k>=lo&&k<=hi) c+=' range';
+    if(k===selStart||k===selEnd) c+=' sel';
+    h+='<span class="'+c+'" data-d="'+d+'">'+d+'</span>'; }
+  el('dp-grid').innerHTML=h;
+  const s=el('dp-sel');
+  if(selStart&&selEnd&&selStart!==selEnd){const a=deKey(Math.min(selStart,selEnd)),b=deKey(Math.max(selStart,selEnd));s.textContent=a.d+'.–'+b.d+'. '+MONTHS[b.m];}
+  else if(selStart){const a=deKey(selStart);s.textContent=a.d+'. '+MONTHS[a.m]+' '+a.y;}
+  else s.textContent='Ingen valgt';
+}
+function applyPickerLabel(){
+  if(selStart&&selEnd&&selStart!==selEnd){const a=deKey(Math.min(selStart,selEnd)),b=deKey(Math.max(selStart,selEnd));
+    el('period-label').textContent=(a.m===b.m&&a.y===b.y)?(a.d+'.–'+b.d+'. '+MONTHS[b.m]+' '+b.y):(a.d+'. '+MONTHS[a.m]+' – '+b.d+'. '+MONTHS[b.m]+' '+b.y);}
+  else if(selStart){const a=deKey(selStart);el('period-label').textContent=a.d+'. '+MONTHS[a.m]+' '+a.y;}
+}
+el('dn-cal').addEventListener('click',e=>{e.stopPropagation();const dp=el('datepicker');dp.hidden=!dp.hidden;if(!dp.hidden)renderPicker();});
+el('dp-prev').addEventListener('click',()=>{pmonth--;if(pmonth<0){pmonth=11;pyear--;}renderPicker();});
+el('dp-next').addEventListener('click',()=>{pmonth++;if(pmonth>11){pmonth=0;pyear++;}renderPicker();});
+el('dp-clear').addEventListener('click',()=>{selStart=selEnd=null;renderPicker();updatePeriod();});
+el('dp-grid').addEventListener('click',e=>{const t=e.target.closest('.dp-day'); if(!t||t.classList.contains('blank'))return;
+  const k=keyOf(pyear,pmonth,+t.dataset.d);
+  if(!selStart||(selStart&&selEnd)){selStart=k;selEnd=null;} else {selEnd=k;}
+  renderPicker(); applyPickerLabel();});
+document.addEventListener('click',e=>{const dp=el('datepicker'); if(!dp||dp.hidden)return; if(!dp.contains(e.target)&&e.target.id!=='dn-cal') dp.hidden=true;});
+updatePeriod();
 </script>
 </body>
 </html>
